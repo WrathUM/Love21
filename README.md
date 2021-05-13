@@ -34,22 +34,20 @@ Please use pip install [library-name] to install all neccessary libraries on thr
 Student Log:
 
 student id 	cat(1) 	cat(2)	cat(3)	cat(4)	cat(5)	... 	cat(n)	NumMonth	Tab	
-001		0	1	2	0	0		1	0		-1
+
 
 This would be tabulated linearly on the first pass and updated as needed depending on whether we care about attendance in the last 6 or 12 months. 
 
 Master Log: (Date is of the class start date)
 
 date(DD/MM/YY) student id	class id	class name	class type	registered	
-01/01/21	001		001		Basketball	cat(7)		T		
-04/04/21	033		042		Yoga		cat(9)		F		
+
 
 
 Class Log:
 
 classs id	start date	end date	class name 	class type 	quota	enrollment	filled
-001		01/01/21	02/01/21	Basketball	cat(7)		15	4		F
-042		04/04/21	06/02/21	Yoga		cat(9)		10	10		T
+
 
 
 Weekly Log would be identical to Master Log in terms of columns. 
