@@ -225,10 +225,10 @@ if (first):
     master_log = weekly_log
 
 #print(master_log)
-#write_to_log("master_log.csv", 'm') #should just overwrite it
-#write_to_log("class_log.csv", 'c')
-#write_to_log("student_log.csv", 's')
-#write_to_log("weekly_log.csv", 'n') #not essential
+write_to_log("master_log.csv", 'm') #should just overwrite it
+write_to_log("class_log.csv", 'c')
+write_to_log("student_log.csv", 's')
+write_to_log("weekly_log.csv", 'n') #not essential
 
 
 print("Done")
