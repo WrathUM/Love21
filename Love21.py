@@ -142,9 +142,11 @@ def assign_class(class_dict):
     for index, class_list in enumerate(class_dict):
         class_dict[class_list].sort(key = lambda x: x[1]) #sorts list of tuples by second element, ascending
         f = open(str(class_list) + ".txt", "w+")
-
+        
         index1 = 0
-        quota = class_log.iat[class_list, 5]
+        
+        modified_index_class_list = class_list - 1
+        quota = class_log.iat[modified_index_class_list, 5]
         while (index1 < quota):
             prior_val = class_dict[class_list][index1][1]
             index2 = index1
@@ -159,7 +161,7 @@ def assign_class(class_dict):
             index1 = index2
         
         for i in range(len(class_dict[class_list])):
-            if (i == class_log.iat[class_list, 5]):
+            if (i == class_log.iat[class_list - 1, 5]):
                 f.write("Cut Off. All Below Did Not Successfully Register.\n")
                 weekly_log.iat[class_dict[class_list][i][2], 5] = 0
                 #weekly_log.at[class_dict[class_list][i][2], 'Registered'] = 0
@@ -197,6 +199,7 @@ student_log = read_in_log("student_log.csv", 's')
 weekly_log = read_in_log("weekly_log.csv", 'n')
 
 weekly_log = delete_duplicates(weekly_log)
+no_ml_bf()
 
 while(True):
     is_first = input("\nHas a Master Log Been Created Before(Y/N): ")
