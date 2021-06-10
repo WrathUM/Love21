@@ -199,7 +199,6 @@ student_log = read_in_log("student_log.csv", 's')
 weekly_log = read_in_log("weekly_log.csv", 'n')
 
 weekly_log = delete_duplicates(weekly_log)
-no_ml_bf()
 
 while(True):
     is_first = input("\nHas a Master Log Been Created Before(Y/N): ")
