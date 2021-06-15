@@ -63,9 +63,10 @@ def read_in_log(path, log_type):
     
 def no_ml_bf():
     for j in range(len(weekly_log)):
-        i_log = pd.DataFrame(data3, columns = ['Student ID', 'Cat1', 'Cat2'
-                                                , 'Cat3', 'Cat4', 'Cat5', 'Cat6'
-                                                , 'Cat7', 'Cat8', 'Cat9', 'Cat10', 'Cat11', 'Cat12'
+        i_log = pd.DataFrame(data3, columns = ['Student ID', 'Cat(1)', 'Cat(2)'
+                                                , 'Cat(3)', 'Cat(4)', 'Cat(5)', 'Cat(6)'
+                                                , 'Cat(7)', 'Cat(8)', 'Cat(9)', 'Cat(10)', 
+                                                'Cat(11)', 'Cat(12)'
                                                 , 'Num This Month'])
         d2 = weekly_log.iat[j,0].split('/')
         for i in range(len(weekly_log)):
@@ -74,7 +75,7 @@ def no_ml_bf():
                 if ((int(weekly_log.iat[i,1]) == int(weekly_log.iat[j,1]))): #same student id, and was successful 
                     num = str(weekly_log.iat[i,4])
                     nums = num.split('.')
-                    category = 'Cat' + nums[0]
+                    category = 'Cat(' + nums[0] + ')'
                     i_log.at[0,category] += 1
                     #check if date is same month
                     d1 = weekly_log.iat[i,0].split('/')
@@ -111,7 +112,7 @@ def brute_force_count_points(): #only works if master_log had entries prior
 def copy_tabs(i_log):
     id = i_log.iat[0,0]
     for i in range(1, len(i_log.columns) - 1):
-        category = 'Cat' + str(i)
+        category = 'Cat(' + str(i) +')'
         student_log.at[id, category] = i_log.at[0, category]
     student_log.at[id, 'Tab'] = 1
 
@@ -147,6 +148,11 @@ def assign_class(class_dict):
         
         modified_index_class_list = class_list - 1
         quota = class_log.iat[modified_index_class_list, 5]
+
+        # get the class category to update student logs
+        class_category_num = class_log.iat[class_list, 4]
+        class_category = 'Cat(' + str(class_category_num) + ')'
+        
         while (index1 < quota):
             prior_val = class_dict[class_list][index1][1]
             index2 = index1
@@ -168,6 +174,9 @@ def assign_class(class_dict):
                 f.write(str(class_dict[class_list][i][0]) + " " + str(class_dict[class_list][i][1]) + "\n")
             else:
                 weekly_log.iat[class_dict[class_list][i][2], 5] = 1
+                print(student_log.iloc[class_dict[class_list][i][2]])
+                student_log.at[class_dict[class_list][i][2], class_category] += 1
+                print(student_log.iloc[class_dict[class_list][i][2]])
                 #weekly_log.at[class_dict[class_list][i][2], 'Registered'] = 1
                 f.write(str(class_dict[class_list][i][0]) + " " + str(class_dict[class_list][i][1]) + "\n")
 
@@ -217,8 +226,9 @@ while(True):
 
 
 class_dict = {}
+print(student_log)
 assign_class(class_dict)
-
+print(student_log)
 
 master_log.append(weekly_log)
 
